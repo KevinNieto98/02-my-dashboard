@@ -1,4 +1,6 @@
-import { PokemonsReponse, SimplePokemon } from ".";
+import Image from "next/image";
+import { PokemonGrid, PokemonsReponse, SimplePokemon } from "@/pokemons";
+//import { PokemonGrid, PokemonsReponse, SimplePokemon } from "@/pokemons";
 
 const getPokemons = async(limit = 20, offset = 0): Promise <SimplePokemon[]> => {
     const data: PokemonsReponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`).then(res =>res.json())
@@ -7,6 +9,8 @@ const getPokemons = async(limit = 20, offset = 0): Promise <SimplePokemon[]> => 
         id: pokemon.url.split('/').at(-2)!,
         name: pokemon.name,
     })  )
+
+    //throw new Error('Esto es un error que no deberia de suceder')
     return pokemons;
 }
 export default async function PokemonsPage() {
@@ -15,10 +19,9 @@ export default async function PokemonsPage() {
 
   return (
     <div className="flex flex-col">
-        <div className="flex flex-wrap gap-10 items-center justify-center">
 
-        </div>
-      {JSON.stringify(pokemons)}
+      <span className="text-5xl my-2">Listado de Pokemons <small>Estatico</small></span>
+      <PokemonGrid pokemons={pokemons}/>
     </div>
   );
 }
