@@ -2,6 +2,13 @@ import Image from "next/image";
 import { PokemonGrid, PokemonsReponse, SimplePokemon } from "@/pokemons";
 //import { PokemonGrid, PokemonsReponse, SimplePokemon } from "@/pokemons";
 
+export const metadata = {
+  title: '151 Pokémons',
+  description: 'Ad minim sit cupidatat culpa consectetur.',
+ };
+ 
+
+
 const getPokemons = async(limit = 20, offset = 0): Promise <SimplePokemon[]> => {
     const data: PokemonsReponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`).then(res =>res.json())
 
