@@ -16,6 +16,7 @@ export async function generateStaticParams() {
     id: id
   }));
 
+  
   // return [
   //   { id: '1' },
   //   { id: '2' },
@@ -34,8 +35,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }:Props): Promise<Metadata> {
 
   try {
+    
     const { id, name } = await getPokemon(params.id);
-  
+
     return {
       title: `${ id } - ${ name }`,
       description: `Página del pokémon ${ name }`
@@ -52,7 +54,7 @@ export async function generateMetadata({ params }:Props): Promise<Metadata> {
 
 const getPokemon = async(id: string): Promise<Pokemon> => {
 
-
+  console.log('ID: ', id);
   try {
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${ id }`,{
       //cache: 'force-cache'// TODO: cambiar esto en un futuro
@@ -62,10 +64,12 @@ const getPokemon = async(id: string): Promise<Pokemon> => {
     }).then( resp => resp.json() );
   
     console.log('Se cargó: ', pokemon.name);
+    
   
     return pokemon;
     
   } catch (error) {
+    console.log('ID: ', id);
     notFound();
   }
 
